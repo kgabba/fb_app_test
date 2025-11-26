@@ -21,4 +21,4 @@ INSERT INTO players (name, position, team, rating) VALUES
 
 INSERT INTO users (name, passw, roles) VALUES
 ('admin', '1111', ARRAY['admin', 'moderator']),
-('tugi', '0000', ARRAY[]::TEXT)
+('tugi', '0000', ARRAY[]::TEXT[]);
