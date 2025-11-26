@@ -27,4 +27,4 @@ api.add_api_route(router_player)
 api.add_api_route(router_user)
 
 if __name__=='__main__':
-    uvicorn.run("main:api",host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:api", host="0.0.0.0", port=8000, reload=True)
