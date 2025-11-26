@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем только папку app/ внутрь контейнера
-COPY ./app ./app
+COPY ./app .
 
 # Рабочая директория — внутри app/
 WORKDIR /app
