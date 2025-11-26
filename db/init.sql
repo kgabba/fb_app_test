@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS players (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     position TEXT,
-    team TEXT
+    team TEXT,
     rating INT
 );
 
@@ -10,11 +10,11 @@ CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     passw TEXT,
-    roles TEXT[]
+    roles TEXT[],
     jwt_token INT
 );
 
-INSERT INTO players (name, position, rating) VALUES
+INSERT INTO players (name, position, team, rating) VALUES
 ('Kamacho', 'forward', 'Sizam', 95),
 ('Gabba', 'defendsman', 'Mitino',  93),
 ('Tugi', 'goalkeeper','Zian',  89);
