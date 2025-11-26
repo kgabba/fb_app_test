@@ -1,0 +1,29 @@
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+import asyncpg
+from proj_18_api.app.deps_and_routes.player_routes import router_player
+from proj_18_api.app.deps_and_routes.user_routes import router_user
+import uvicorn
+DATABASE_URL = ''
+
+
+@asynccontextmanager
+async def lifespan(api: FastAPI):
+    # создаём одно соединение при старте
+    api.state.conn = await asyncpg.connect(DATABASE_URL)
+    print("БД подключена")
+
+    yield   # приложение работает
+
+    # закрываем при остановке
+    await api.state.conn.close()
+    print("БД закрыта")
+
+
+api = FastAPI(lifespan=lifespan)
+
+api.add_api_route(router_player)
+api.add_api_route(router_user)
+
+if __name__=='__main__':
+    uvicorn.run("main:api", port=8030, reload=True)
