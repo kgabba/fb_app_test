@@ -4,7 +4,7 @@ from schemas.model import User
 from db_utils.db_deps import get_con
 import asyncpg
 
-async def check_from_db(name, password, connect: asyncpg.Connection = Depends(get_con)) -> User:
+async def check_from_db(name, password, connect: asyncpg.Connection) -> User:
     info_db = await connect.fetchrow('select * from users where name = $1', name)
     if not info_db:
         raise HTTPException(status_code=401, detail='incorrect login')
@@ -13,8 +13,8 @@ async def check_from_db(name, password, connect: asyncpg.Connection = Depends(ge
     return User(username=info_db['name'], password=None, roles=info_db['roles'])
 
 
-async def basic_authoriz(user: HTTPBasicCredentials = Depends(HTTPBasic())) -> User:
-    return await check_from_db(user.username, user.password)
+async def basic_authoriz(user: HTTPBasicCredentials = Depends(HTTPBasic()), con: asyncpg.Connection = Depends(get_con)) -> User:
+    return await check_from_db(user.username, user.password, con)
 
 # async def check_valid_roles_from_db(need_roles: list[str]|None = None, user: HTTPBasicCredentials = Depends(HTTPBasic())) -> User:
 #     user_from_db = await check_from_db(user.username, user.password)
