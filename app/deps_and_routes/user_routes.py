@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.deps_and_routes.user_deps import basic_authoriz, check_valid_roles_from_db
+from deps_and_routes.user_deps import basic_authoriz, check_valid_roles_from_db
 
 router_user = APIRouter(prefix='/user')
 
