@@ -4,7 +4,8 @@ import asyncpg
 from proj_18_api.app.deps_and_routes.player_routes import router_player
 from proj_18_api.app.deps_and_routes.user_routes import router_user
 import uvicorn
-DATABASE_URL = ''
+import os
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 @asynccontextmanager
@@ -26,4 +27,4 @@ api.add_api_route(router_player)
 api.add_api_route(router_user)
 
 if __name__=='__main__':
-    uvicorn.run("main:api", port=8030, reload=True)
+    uvicorn.run("main:api",host="0.0.0.0", port=8000, reload=True)
