@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 import asyncpg
-from app.deps_and_routes.player_routes import router_player
-from app.deps_and_routes.user_routes import router_user
+from deps_and_routes.player_routes import router_player
+from deps_and_routes.user_routes import router_user
 import uvicorn
 import os
 DATABASE_URL = os.getenv('DATABASE_URL')

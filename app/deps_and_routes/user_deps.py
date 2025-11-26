@@ -1,7 +1,7 @@
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi import Depends, HTTPException
-from app.schemas.model import User
-from app.db_utils.db_deps import get_con
+from schemas.model import User
+from db_utils.db_deps import get_con
 
 
 async def check_from_db(name, password, connect = Depends(get_con)) -> User:
