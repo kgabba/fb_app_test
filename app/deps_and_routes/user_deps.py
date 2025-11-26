@@ -2,9 +2,9 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi import Depends, HTTPException
 from schemas.model import User
 from db_utils.db_deps import get_con
+import asyncpg
 
-
-async def check_from_db(name, password, connect = Depends(get_con)) -> User:
+async def check_from_db(name, password, connect: asyncpg.Connection = Depends(get_con)) -> User:
     info_db = await connect.fetchrow('select * from users where name = $1', name)
     if not info_db:
         raise HTTPException(status_code=401, detail='incorrect login')
